@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="fx.js"></script>
+<script type="text/javascript" src="GetLunarDay.js"></script>
+<title>模板化空间轴</title>
+<style type="text/css">
+  body{background:url(images/1.jpg) #1c0c0f center 0 no-repeat fixed;
+  background-size:100%;margin:0;padding:0;
+  padding-top:41px;
+  }
+  
+  .hide{display:none;}
+  
+  
+ .top{width:100%;height:41px;position:fixed;top:0px;
+  background:#001e3b;
+  z-index:99;
+    
+ }
+ .header{width:960px;height:200px;
+  margin:0px auto ;
+  background:rgba(255,255,255,.2);
+ }
+.container{width:960px;position:relative;
+  margin:0px auto; 
+}
+.scrubber{position:absolute;width:47px;min-height:200px;
+  top:29px;left:0px;z-index:999;
+ 
+}
+.scrubber a{display:block;height:26px;line-height:26px;
+padding-right:5px;text-align:right;text-decoration:none;
+border-right:2px solid #c8c8c8;border-right-color:rgba(200,200,200,.5);
+font-size;12px;color:#a5a5a5;
+text-shadow:0 1px 1px rgba(0,0,0,.3);
+}
+.scrubber a:hover,.scrubber .current{border-right-color:#7ebad0;
+color:#7ebad0;font-weight; 
+}
+
+
+
+.content{position:relative;min-height:1000px;
+ padding-top:50px;padding-left:160px; 
+  background:url(images/spine.png) 121px 0 repeat-y;
+}
+.content_year,
+.content_month{position:relative;height:30px;line-height:30px;left:-90px;
+	font-size:14px;color:#a5a5a5;font-weight:bold;
+	clear:both;
+	
+	
+	}
+.content_item{position:relative;min-height:300px;width:370px;margin:20px 30px 0 0;
+	color:#888;
+	background:#fff;
+	border-radius:4px;
+	}
+.content_item_left{float:left;}	
+.content_item_right{float:right}	
+.content_item_isFrist{margin-top: -20px;}
+.content_item_icon_arrow{
+	position:absolute;left:-10px;top:20px;height:0;	
+	border-color:transparent #fff transparent transparent;
+	border-width:10px 10px 10px 0;
+	border-style:dashed solid dashed dashed;
+	}
+.content_item_icon_dot{
+	position:absolute;width:11px;height:11px;left:-43px;top:25px;
+	border-radius:11px;
+	background-color:#fff;
+	}
+.content_item_icon_dot_child{
+	position:absolute;width:7px;height:7px;left:2px;top:2px;
+	border-radius:7px;
+	background-color:#b3dae9;
+	}	
+.content_item_head{padding:15px;padding-bottom:0px;}
+.content_item_head_title{position:relative;height:46px;line-height:46px;
+padding:0px 0px 10px 56px;
+font-size:28px;
+}
+.content_item_head_title_lunar{position:absolute;left:0;top:0;width:52px;height:46px;
+line-height:23px;
+font-size:27px;color:#000;
+overflow:hidden;
+background:#b3dae9;
+border-radius:8px;
+}
+.content_item_head_intro{font-size:14px;line-height:22px;padding:0px 15px;margin-bottom:10px;}
+.ui_icon{width:15px;height:15px;font-size:0px;overflow:hidden;display:inline-block;
+margin-right:5px;vertical-align:bottom;
+background-image:url(images/timeline.png);background-repeat:no-repeat;
+}
+.quote_after{background-position:-986px -102px;}
+.quote_before{background-position:-986px -85px;}
+.content_item_media{height:277px;overflow:hidden;}
+.content_item_footer{padding:10px 15px;margin:0px 15px ;border-top:1px solid #d6d6d6;font-size:12px;color:#b2b2b2;line-height:20px;}
+.content_item_footer_info{}
+.content_item_footer_info a{display:inline-block;}
+.icon_zan,.icon_pin{width:20px;height:20px;font-size:0px;overflow:hidden;display:inline-block;
+margin-right:5px;vertical-align:bottom;
+background-image:url(images/timeline.png);background-repeat:no-repeat;}
+.icon_zan{background-position:-883px -21px;}
+.icon_pin{background-position:-897px -42px;}
+
+.content_item_footer_like{padding-top:5px;}
+
+
+
+
+
+
+
+
+
+</style>
+
+
+</head>
+
+
+
+
+<body>
+<div class="hide">
+   <div id="scrubber_year_tpl">
+    
+      <a href="javascript:;" class="scrubber_year">{year} </a>
+      {list}
+   </div>
+   <div id="scrubber_month_tpl">
+     <a href="javascript:;" class='scrubber_month'>{month}月</a>
+   
+   </div>
+
+
+   <div id="content_year_tpl">
+    
+      <div class=" content_year">{year}</div>
+      {list}
+   </div>
+   
+   <div id="content_month_tpl">
+     <div class=" content_month">{month}月</div>
+     {list}
+   </div>
+
+   <div id="content_item_tpl">
+        
+      <div class="content_item  content_item_{position} content_item_{isFrist}">
+       <div class="content_item_icon_arrow"></div>
+       <div class='content_item_icon_dot'>
+         <div class='content_item_icon_dot_child'></div>
+       </div>
+       
+       <div class="content_item_head">
+          <div class="content_item_head_title">
+             <div class="content_item_head_title_lunar">{lunar}</div>
+             {date}
+          </div>
+          <div class="content_item_head_intro">
+           <i class='ui_icon quote_before'></i>
+               {intro}
+            <i class='ui_icon quote_after'></i>    
+          </div>
+       </div>
+       
+       <div class="content_item_media">
+        {media}
+       </div>
+       <div class="content_item_footer">
+         <div class="content_item_footer_info">
+             <a href="javascript:;" title="赞"><i class="icon_zan"></i>({like})</a>
+              <a href="javascript:;" title="评论"><i class="icon_pin"></i>({comment})</a>
+          </div> 
+          <div class="content_item_footer_like">
+             {like_format}人觉得很赞
+          
+          </div>
+          
+          
+       </div>
+     </div>  
+   
+   </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+ <div class="top"></div>
+ <div  class="header"></div>
+ <div  class="container">
+   <div class="scrubber" id="scrubber">
+ <!--    <a href="javascript:;" class="scrubber_year current">2014</a>
+     <a href="javascript:;" class='scrubber_month'>3月</a>
+     <a href="javascript:;" class="scrubber_month">2月</a>
+     
+  -->   
+     
+   </div>
+   
+   <div class="content" id="content">
+<!-- <div class=" content_year">2014</div>
+     <div class="content_month">3月</div>
+     
+     <div class="content_item">
+       <div class="content_item_icon_arrow"></div>
+       <div class='content_item_icon_dot'>
+         <div class='content_item_icon_dot_child'></div>
+       </div>
+       
+       <div class="content_item_head">
+          <div class="content_item_head_title">
+             <div class="content_item_head_title_lunar">三<br>&nbsp;十</div>
+             2014-03-30
+          </div>
+          <div class="content_item_head_intro">
+           <i class='ui_icon quote_before'></i>
+                对象不可层叠、不脱离文档流，参考自身静态位置通过          top,bottom,left,right 定位，并且可以通过z-index进行层次分级。
+            <i class='ui_icon quote_after'></i>    
+          </div>
+       </div>
+       
+       <div class="content_item_media">
+         <img src="images/psb.jpeg" width="370px" />
+       </div>
+       <div class="content_item_footer">
+         <div class="content_item_footer_info">
+             <a href="javascript:;" title="赞"><i class="icon_zan"></i>(1000)</a>
+              <a href="javascript:;" title="评论"><i class="icon_pin"></i>(2199)</a>
+          </div> 
+          <div class="content_item_footer_like">
+             2.5万人觉得很赞
+          
+          </div>
+          
+          
+       </div>
+     </div>  
+    
+ ---->  
+   
+   
+   
+   </div>
+ 
+ </div>
+  
+<script type="text/javascript">
+//--------------------公用函数-----------
+var g=function(id){
+	return document.getElementById(id);
+	
+	}
+
+var gTpl=function(id){
+	return g(id).innerHTML;
+	
+	}
+//--------------------格式化数据------------
+var list={};
+var length=data.length;
+console.log(length);
+for(var i=0;i<length;i++){
+  	
+  var date=new Date(data[i].date);	
+  var year=date.getFullYear();	 
+  var month=date.getMonth()+1;
+  var lunar = GetLunarDateString( date );
+  var item=data[i];
+  item.lunar = lunar[0]+'<br>&nbsp;'+lunar[1];
+  item.like_format = item.like < 10000 ? item.like : ( item.like / 10000 ).toFixed(1) + '万';
+	
+ // var lunar=	;
+ if(list[year]==undefined){list[year]={}};
+ if(list[year][month]==undefined){list[year][month]=[]};
+ list[year][month].push(item);
+ 
+	};
+//--------------------输出模板------------------------
+
+//时序表-----------
+var content_year=[];
+var scrubber_year=[];
+
+for(y in list){
+	var scrubber_month=[];
+	
+	for(m in list[y]){
+		scrubber_month.unshift(gTpl('scrubber_month_tpl').replace(/\{month\}/,m));
+		
+		}
+	scrubber_year.push(gTpl('scrubber_year_tpl').replace(/\{year\}/,y).replace(/\{list\}/,scrubber_month.join(' ')));
+	};
+
+//内容表----------------
+for(y in list){
+	var content_month=[];
+	
+	for(m in list[y]){
+		var content_item=[];
+		var isFrist=true;
+		 for(var i=0;i<list[y][m].length;i++){
+			 var itm=list[y][m][i];
+			 content_item.push(gTpl('content_item_tpl')
+			 .replace(/\{lunar\}/g,itm.lunar)
+			 .replace(/\{date\}/g,itm.date)
+			 .replace(/\{intro\}/g,itm.intro)
+			 .replace(/\{media\}/g,itm.media)
+			 .replace(/\{like\}/g,itm.like)
+			 .replace(/\{comment\}/g,itm.comment)
+             .replace(/\{like_format\}/g,itm.like_format)
+			 .replace(/\{position\}/g,i%2?'right':'left')
+			 .replace(/\{isFrist\}/g,isFrist==true?'isFrist':'')
+			 )
+			 
+			 isFrist=false;
+			 }
+		
+		content_month.unshift(gTpl('content_month_tpl').replace(/\{month\}/,m).replace(/\{list\}/,content_item.join(' ')));
+		
+		
+		}
+	   content_year.push(gTpl('content_year_tpl').replace(/\{year\}/,y).replace(/\{list\}/,content_month.join(' ')));
+	};
+	
+g('scrubber').innerHTML=scrubber_year.join(' ');
+g('content').innerHTML=content_year.join(' ')+gTpl('content_month_tpl').replace(/\{month\}/g,'').replace(/月/g,'');
+
+
+
+
+</script>
+
+
+ 
+
+</body>
+</html>
