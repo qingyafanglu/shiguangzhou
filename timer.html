@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>时光轴</title>
+    <link rel="stylesheet" href="timer.css">
+
+</head>
+<body>
+  <div class="hide">
+
+    <div id="tpl_s_year">
+    <a href="#">{year}</a>
+    {list}
+    </div>
+    <div id="tpl_s_month">
+        <a href="#">{month}月</a>
+
+    </div>
+
+
+      <div id="tpl_c_year">
+          <div class="c_year">{year}</div>
+          {list}
+      </div>
+      <div id="tpl_c_month">
+          <div class="c_month">{month}月</div>
+          {list}
+      </div>
+      <div id="tpl_c_item">
+          <div class="c_item  {position}  {isFirst}">
+              <div class="c_i_icon_arrow"></div>
+              <div class="c_i_icon_dot">
+                  <div class="c_i_icon_dot_child"></div>
+              </div>
+              <div class="c_i_header">
+                  <div class="c_i_header_title">
+                      <div class="c_i_header_title_icon">{lunar}</div>
+                      {date}
+                  </div>
+                  <div class="c_i_header_intro">
+                      <i class="ui_ico quote_before"></i>
+                     {intro}
+                      <i class="ui_ico quote_after"></i>
+                  </div>
+              </div>
+              <div class="c_i_img">
+                  {media}
+              </div>
+              <div class="c_i_footer">
+                  <div class="c_i_footer_info">
+                      <a href="#" class="zan"><i class="zan_icon"></i>({like})</a>
+                      <a href="#" class="pin"><i class="pin_icon"></i>({comment})</a>
+                  </div>
+                  <div class="c_i_footer_intro">
+                      {like_format}万人觉得很赞
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="title"></div>
+<div class="top"></div>
+<div class="container">
+    <div class="scrubber" id="scrubber">
+        <a href="#">2014</a>
+        <a href="#">2月</a>
+        <a href="#">3月</a>
+
+    </div>
+    <div class="content" id="content">
+        <div class="c_year">2014</div>
+        <div class="c_item">
+          <div class="c_i_icon_arrow"></div>
+          <div class="c_i_icon_dot">
+              <div class="c_i_icon_dot_child"></div>
+          </div>
+          <div class="c_i_header">
+              <div class="c_i_header_title">
+                  <div class="c_i_header_title_icon">初<br/>&nbsp;五</div>
+                  2014-3-31
+              </div>
+              <div class="c_i_header_intro">
+                  <i class="ui_ico quote_before"></i>
+                  在这春林初盛，草长莺飞的日子，QQ空间愿你关掉电脑，放下手机，与三五好友相约青山绿水中，感受春天带来的勃勃生机···
+                  <i class="ui_ico quote_after"></i>
+              </div>
+          </div>
+          <div class="c_i_img">
+              <img src="images/psb.jpeg" />
+          </div>
+          <div class="c_i_footer">
+              <div class="c_i_footer_info">
+                  <a href="#" class="zan"><i class="zan_icon"></i>(5000)</a>
+                  <a href="#" class="pin"><i class="pin_icon"></i>(2000)</a>
+              </div>
+              <div class="c_i_footer_intro">
+                  3.2万人觉得很赞
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script src="fx.js"></script>
+<script src="GetLunarDay.js"></script>
+  <script src="timer.js"></script>
+</body>
+</html>
